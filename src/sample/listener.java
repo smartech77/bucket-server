@@ -36,10 +36,10 @@ public class listener implements Runnable {
                 DataOutputStream dout = new DataOutputStream(s.getOutputStream());
 
 
-                String Paloki = din.readUTF();
-                String[] Palokiz = Paloki.split("spergzilion");
+                String input = din.readUTF();
+                String[] refinedinput = input.split("spergzilion");
 
-                dout.writeUTF(filtertheneedful(Palokiz));
+                dout.writeUTF(filtertheneedful(refinedinput));
 
                 dout.flush();
                 try {
@@ -66,7 +66,7 @@ public class listener implements Runnable {
     public String filtertheneedful(String[] TcpMessage) throws SQLException {
      //   String[]Credentials = TcpMessage[2].split("aolaskjdfkjasdbf");
 
-        if (TcpMessage[0].equals("deleteCLIT")) { return sql1.deleteCLIT(Integer.parseInt(TcpMessage[1])); }
+        if      (TcpMessage[0].equals("deleteCLIT")) { return sql1.deleteCLIT(Integer.parseInt(TcpMessage[1])); }
         else if (TcpMessage[0].equals("deleteCLT")){ return sql1.deleteCLT(Integer.parseInt(TcpMessage[1])); }
         else if (TcpMessage[0].equals("deleteECL")){ return sql1.deleteECL(Integer.parseInt(TcpMessage[1]));  }
         else if (TcpMessage[0].equals("deleteEMP")){return sql1.deleteEMP(Integer.parseInt(TcpMessage[1]));}
@@ -78,36 +78,39 @@ public class listener implements Runnable {
         else if (TcpMessage[0].equals("pullTimeFrameTF")){return sql1.pullTimeFrameTF(Integer.parseInt(TcpMessage[1]));}
 
         else {
-
-            String[]Payload = TcpMessage[3].split("0yormungandr0yormungandr0");
+            String[]Payload = TcpMessage[2].split("0yormungandr0yormungandr0");
 
          if (TcpMessage[0].equals("insertCLIT")) {
                 return sql1.insertCLIT(Payload[0],Integer.parseInt(Payload[1]),Integer.parseInt(Payload[2]),Integer.parseInt(Payload[3]) );
             } else if (TcpMessage[0].equals("insertCLT")) {
                 return sql1.insertCLT(Payload[0],Integer.parseInt(Payload[1]));
             } else if (TcpMessage[0].equals("insertEmployee")) {
-                return sql1.insertEmployee(Payload[0],Payload[0]);
+                return sql1.insertEmployee(Payload[0],Payload[1]);
 
             } else if (TcpMessage[0].equals("insertEmployeeChecklist")) {
                 return sql1.insertEmployeeChecklist(Integer.parseInt(Payload[0]),Integer.parseInt(Payload[1]),Payload[2],Integer.parseInt(Payload[3]) , Payload[4]);
             } else if (TcpMessage[0].equals("insertTF")) {
                 return sql1.insertTF(Payload[0]);
+
+
             } else if (TcpMessage[0].equals("updateCLIT")) {
-                return sql1.updateCLIT(Payload[0],Integer.parseInt(Payload[1]),Integer.parseInt(Payload[2]));
+                return sql1.updateCLIT(Payload[1],Integer.parseInt(Payload[0]),Integer.parseInt(TcpMessage[1]));
             } else if (TcpMessage[0].equals("updateClt")) {
-                return sql1.updateClt(Payload[0],Integer.parseInt(Payload[1]),Integer.parseInt(Payload[2]));
+                return sql1.updateClt(Payload[1],Integer.parseInt(Payload[0]),Integer.parseInt(TcpMessage[1]));
             } else if (TcpMessage[0].equals("updateEmployee")) {
-                return sql1.updateEmployee(Payload[0],Payload[0], Integer.parseInt(Payload[0]));
+                return sql1.updateEmployee((Payload[0]),Payload[1],Integer.parseInt(TcpMessage[1]) );
             } else if (TcpMessage[0].equals("updateEmployeeChecklist")) {
-                return sql1.updateEmployeeChecklist(Integer.parseInt(Payload[0]),Payload[1],Payload[2],Integer.parseInt(Payload[3]) );
+
+             //
+                return sql1.updateEmployeeChecklist(Integer.parseInt(Payload[0] ),Payload[1],(Payload[2]),Integer.parseInt(TcpMessage[1]));
             } else if (TcpMessage[0].equals("updateTF")) {
-                return sql1.updateTF(Payload[0],Integer.parseInt(Payload[1]));
+                return sql1.updateTF(Payload[0], Integer.parseInt(TcpMessage[1]));
             }
         }
 
         {
 
-        return " Did a thing ";
+        return "Your request resulted in nothing";
     }
     //}
 
