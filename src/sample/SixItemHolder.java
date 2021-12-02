@@ -2,6 +2,7 @@ package sample;
 
 public class SixItemHolder {
 
+// this is just a generic class for holding strings so we can compare them
 
     String text1;
     String text2;

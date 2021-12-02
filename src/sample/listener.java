@@ -6,15 +6,12 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 public class listener implements Runnable {
 
     int socket1;
 
-    SqlRobot sql1 = new SqlRobot();
+    SqlSearcherObject sql1 = new SqlSearcherObject();
 
     public listener() {
     }
@@ -24,7 +21,6 @@ public class listener implements Runnable {
 
     }
 
-    //adds a new game
 
 
     public void run() {
@@ -63,16 +59,52 @@ public class listener implements Runnable {
 
     }
 
-    //this basically filters what is received in the run method
+    //this  filters what is received in the run method
     //and reacts accordingly
-    // 1mode 2creator 3payload 4extra payload
+
 
     public String filtertheneedful(String[] TcpMessage) throws SQLException {
+     //   String[]Credentials = TcpMessage[2].split("aolaskjdfkjasdbf");
 
-        System.out.println(TcpMessage[0] + TcpMessage[1] + TcpMessage[2] + TcpMessage[3]);
+        if (TcpMessage[0].equals("deleteCLIT")) { return sql1.deleteCLIT(Integer.parseInt(TcpMessage[1])); }
+        else if (TcpMessage[0].equals("deleteCLT")){ return sql1.deleteCLT(Integer.parseInt(TcpMessage[1])); }
+        else if (TcpMessage[0].equals("deleteECL")){ return sql1.deleteECL(Integer.parseInt(TcpMessage[1]));  }
+        else if (TcpMessage[0].equals("deleteEMP")){return sql1.deleteEMP(Integer.parseInt(TcpMessage[1]));}
+        else if (TcpMessage[0].equals("deleteTF")){return sql1.deletetf(Integer.parseInt(TcpMessage[1]));}
+        else if (TcpMessage[0].equals("pullCLIT")){return sql1.pullCLIT(Integer.parseInt(TcpMessage[1]));}
+        else if (TcpMessage[0].equals("pullCLTnoITEMS")){return sql1.pullCLTnoITEMS(Integer.parseInt(TcpMessage[1]));}
+        else if (TcpMessage[0].equals("pullEmployee")){return sql1.pullEmployee(Integer.parseInt(TcpMessage[1]));}
+        else if (TcpMessage[0].equals("pullEmployeeCheckListECL")){return sql1.pullEmployeeCheckListECL(Integer.parseInt(TcpMessage[1]));}
+        else if (TcpMessage[0].equals("pullTimeFrameTF")){return sql1.pullTimeFrameTF(Integer.parseInt(TcpMessage[1]));}
 
+        else {
 
-        ///////////////
+            String[]Payload = TcpMessage[3].split("0yormungandr0yormungandr0");
+
+         if (TcpMessage[0].equals("insertCLIT")) {
+                return sql1.insertCLIT(Payload[0],Integer.parseInt(Payload[1]),Integer.parseInt(Payload[2]),Integer.parseInt(Payload[3]) );
+            } else if (TcpMessage[0].equals("insertCLT")) {
+                return sql1.insertCLT(Payload[0],Integer.parseInt(Payload[1]));
+            } else if (TcpMessage[0].equals("insertEmployee")) {
+                return sql1.insertEmployee(Payload[0],Payload[0]);
+
+            } else if (TcpMessage[0].equals("insertEmployeeChecklist")) {
+                return sql1.insertEmployeeChecklist(Integer.parseInt(Payload[0]),Integer.parseInt(Payload[1]),Payload[2],Integer.parseInt(Payload[3]) , Payload[4]);
+            } else if (TcpMessage[0].equals("insertTF")) {
+                return sql1.insertTF(Payload[0]);
+            } else if (TcpMessage[0].equals("updateCLIT")) {
+                return sql1.updateCLIT(Payload[0],Integer.parseInt(Payload[1]),Integer.parseInt(Payload[2]));
+            } else if (TcpMessage[0].equals("updateClt")) {
+                return sql1.updateClt(Payload[0],Integer.parseInt(Payload[1]),Integer.parseInt(Payload[2]));
+            } else if (TcpMessage[0].equals("updateEmployee")) {
+                return sql1.updateEmployee(Payload[0],Payload[0], Integer.parseInt(Payload[0]));
+            } else if (TcpMessage[0].equals("updateEmployeeChecklist")) {
+                return sql1.updateEmployeeChecklist(Integer.parseInt(Payload[0]),Payload[1],Payload[2],Integer.parseInt(Payload[3]) );
+            } else if (TcpMessage[0].equals("updateTF")) {
+                return sql1.updateTF(Payload[0],Integer.parseInt(Payload[1]));
+            }
+        }
+
         {
 
         return " Did a thing ";
