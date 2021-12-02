@@ -9,7 +9,7 @@ public class SqlSearcherObject {
 
     static String USER = "root";
     static String PASS = "root";
-    static String DB_URL = "jdbc:mysql://localhost:3306/titsgame";
+    static String DB_URL = "jdbc:mysql://localhost:3306/itsgame";
     final String emptyspace = " ";
 
 
@@ -19,7 +19,7 @@ public class SqlSearcherObject {
     public String updateClt(String Text1, int boolean1, int id) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         System.out.println("Updating the thing");
-        PreparedStatement preparedstatement = conn.prepareStatement("UPDATE  titsgame.checklisttemplate SET description=? ,type=? where id=?");
+        PreparedStatement preparedstatement = conn.prepareStatement("UPDATE  itsgame.checklisttemplate SET description=? ,type=? where id=?");
         preparedstatement.setString(1, Text1);
         preparedstatement.setInt(2, boolean1);
         preparedstatement.setInt(3, id);
@@ -33,7 +33,7 @@ public class SqlSearcherObject {
     public String insertCLT(String Text1, int boolean1) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         System.out.println("Uploading the thing");
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO titsgame.checklisttemplate (description, type) VALUES (?, ?)");
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO itsgame.checklisttemplate (description, type) VALUES (?, ?)");
         preparedStatement.setString(1, Text1);
         preparedStatement.setInt(2, boolean1);
         preparedStatement.executeUpdate();
@@ -46,7 +46,7 @@ public class SqlSearcherObject {
     public String insertTF(String Text1) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         System.out.println("Uploading the thing");
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO titsgame.time_frame (name) VALUES (?)");
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO itsgame.time_frame (name) VALUES (?)");
         preparedStatement.setString(1, Text1);
         preparedStatement.executeUpdate();
         System.out.println("Uploading the thing");
@@ -54,12 +54,12 @@ public class SqlSearcherObject {
         System.out.println("Thing uploaded!");
         return " Thing uploaded to time_frame ";
     }
-    //  "UPDATE  titsgame.checklisttemplate SET description=? ,type=? where id=?"
+    //  "UPDATE  itsgame.checklisttemplate SET description=? ,type=? where id=?"
 
     public String updateTF(String Text1, int id) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         System.out.println("Updating the thing");
-        PreparedStatement preparedStatement = conn.prepareStatement("update titsgame.time_frame set name=? where id=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("update itsgame.time_frame set name=? where id=?");
         preparedStatement.setString(1, Text1);
         preparedStatement.setInt(2, id);
         preparedStatement.executeUpdate();
@@ -73,7 +73,7 @@ public class SqlSearcherObject {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         System.out.println("Uploading the thing");
         if (crossreference("clt", String.valueOf(CheckListID)) && crossreference("tf", String.valueOf(timeDropdown))) {
-            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO titsgame.checklist_item_template (description, checklist_id, time_dropdown, active  ) VALUES (?,?,?,?)");
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO itsgame.checklist_item_template (description, checklist_id, time_dropdown, active  ) VALUES (?,?,?,?)");
             preparedStatement.setString(1, description);
             preparedStatement.setInt(2, CheckListID);
             preparedStatement.setInt(3, timeDropdown);
@@ -89,7 +89,7 @@ public class SqlSearcherObject {
     public String updateCLIT(String description, int boolean1, int id) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         System.out.println("Uploading the thing");
-        PreparedStatement preparedStatement = conn.prepareStatement("update titsgame.checklist_item_template set description=? , active=? where id=? ");
+        PreparedStatement preparedStatement = conn.prepareStatement("update itsgame.checklist_item_template set description=? , active=? where id=? ");
         preparedStatement.setString(1, description);
         preparedStatement.setInt(2, boolean1);
         preparedStatement.setInt(3, id);
@@ -105,7 +105,7 @@ public class SqlSearcherObject {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         System.out.println("Uploading the thing");
 
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO titsgame.employee (firstname, lastname ) VALUES (?,?)");
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO itsgame.employee (firstname, lastname ) VALUES (?,?)");
         preparedStatement.setString(1, firstname);
         preparedStatement.setString(2, lastname);
         preparedStatement.executeUpdate();
@@ -120,7 +120,7 @@ public class SqlSearcherObject {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         System.out.println("Uploading the thing");
 
-        PreparedStatement preparedStatement = conn.prepareStatement("update  titsgame.employee  set firstname=?, lastname=? where id=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("update  itsgame.employee  set firstname=?, lastname=? where id=?");
         preparedStatement.setString(1, firstname);
         preparedStatement.setString(2, lastname);
         preparedStatement.setInt(3, id);
@@ -138,7 +138,7 @@ public class SqlSearcherObject {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         System.out.println("Uploading the thing");
         if (crossreference("emp", String.valueOf(employeeid))) {
-            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO titsgame.employee_check_list (employeeid, ischecked, description, check_list_id, time_dropdown  ) VALUES (?,?,?,?,?)");
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO itsgame.employee_check_list (employeeid, ischecked, description, check_list_id, time_dropdown  ) VALUES (?,?,?,?,?)");
             preparedStatement.setInt(1, employeeid);
             preparedStatement.setInt(2, ischecked);
             preparedStatement.setString(3, description);
@@ -157,7 +157,7 @@ public class SqlSearcherObject {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         System.out.println("Uploading the thing");
         {
-            PreparedStatement preparedStatement = conn.prepareStatement("update titsgame.employee_check_list set  ischecked=? , description=? ,  time_dropdown=? where id=?  ");
+            PreparedStatement preparedStatement = conn.prepareStatement("update itsgame.employee_check_list set  ischecked=? , description=? ,  time_dropdown=? where id=?  ");
             preparedStatement.setInt(1, ischecked);
             preparedStatement.setString(2, description);
             preparedStatement.setString(3, time_Dropdown);
@@ -172,7 +172,7 @@ public class SqlSearcherObject {
 
     public String deleteECL(int id) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM titsgame.employee_check_list where id=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM itsgame.employee_check_list where id=?");
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
         conn.close();
@@ -181,7 +181,7 @@ public class SqlSearcherObject {
 
     public String deletetf(int id) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM titsgame.time_frame where id=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM itsgame.time_frame where id=?");
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
         conn.close();
@@ -190,7 +190,7 @@ public class SqlSearcherObject {
 
     public String deleteEMP(int id) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM titsgame.employee where id=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM itsgame.employee where id=?");
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
         conn.close();
@@ -199,7 +199,7 @@ public class SqlSearcherObject {
 
     public String deleteCLT(int id) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM titsgame.checklisttemplate where id=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM itsgame.checklisttemplate where id=?");
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
         conn.close();
@@ -208,7 +208,7 @@ public class SqlSearcherObject {
 
     public String deleteCLIT(int id) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM titsgame.checklist_item_template where id=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM itsgame.checklist_item_template where id=?");
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
         conn.close();
@@ -222,9 +222,9 @@ public class SqlSearcherObject {
         SixItemHolder bag = new SixItemHolder();
         bag.setText1(String.valueOf(id));
         if (bag.getText1().equals("-8008135")) {
-            bag.setText2("select * from titsgame.check_list_item_template");
+            bag.setText2("select * from itsgame.check_list_item_template");
         } else {
-            bag.setText2("select * FROM titsgame.checklist_item_template where id=?");
+            bag.setText2("select * FROM itsgame.checklist_item_template where id=?");
         }
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         PreparedStatement preparedStatement = conn.prepareStatement(bag.getText2());
@@ -247,9 +247,9 @@ public class SqlSearcherObject {
         SixItemHolder bag = new SixItemHolder();
         bag.setText1(String.valueOf(id));
         if (bag.getText1().equals("-8008135")) {
-            bag.setText2("select * from titsgame.checklisttemplate");
+            bag.setText2("select * from itsgame.checklisttemplate");
         } else {
-            bag.setText2("select * FROM titsgame.checklisttemplate where id=?");
+            bag.setText2("select * FROM itsgame.checklisttemplate where id=?");
         }
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         PreparedStatement preparedStatement = conn.prepareStatement(bag.getText2());
@@ -272,9 +272,9 @@ public class SqlSearcherObject {
         SixItemHolder bag = new SixItemHolder();
         bag.setText1(String.valueOf(id));
         if (bag.getText1().equals("-8008135")) {
-            bag.setText2("select * from titsgame.employee");
+            bag.setText2("select * from itsgame.employee");
         } else {
-            bag.setText2("select * FROM titsgame.employee where id=?");
+            bag.setText2("select * FROM itsgame.employee where id=?");
         }
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         PreparedStatement preparedStatement = conn.prepareStatement(bag.getText2());
@@ -297,9 +297,9 @@ public class SqlSearcherObject {
         SixItemHolder bag = new SixItemHolder();
         bag.setText1(String.valueOf(id));
         if (bag.getText1().equals("-8008135")) {
-            bag.setText2("select * from titsgame.employee_check_list");
+            bag.setText2("select * from itsgame.employee_check_list");
         } else {
-            bag.setText2("select * FROM titsgame.employee_check_list where id=?");
+            bag.setText2("select * FROM itsgame.employee_check_list where id=?");
         }
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         PreparedStatement preparedStatement = conn.prepareStatement(bag.getText2());
@@ -322,9 +322,9 @@ public class SqlSearcherObject {
         SixItemHolder bag = new SixItemHolder();
         bag.setText1(String.valueOf(id));
         if (bag.getText1().equals("-8008135")) {
-            bag.setText2("select * from titsgame.time_frame");
+            bag.setText2("select * from itsgame.time_frame");
         } else {
-            bag.setText2("select * FROM titsgame.time_frame where id=?");
+            bag.setText2("select * FROM itsgame.time_frame where id=?");
         }
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         PreparedStatement preparedStatement = conn.prepareStatement(bag.getText2());
@@ -339,10 +339,9 @@ public class SqlSearcherObject {
 
         return String.valueOf(stringBuilder1);
     }
-
     // I encountered a bug with the MYSQL software I was using and It wouldn't let me use Foreign Keys,
-// therefore so this and the ticket class are an adhoc solution
-// in a team environment I would ask somebody for help to properly use foreign keys for better performance
+    // therefore so this and the ticket class are an adhoc solution
+    // in a team environment I would ask somebody for help to properly use foreign keys for better performance
     public Boolean crossreference
     (String destination, String id1) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -350,7 +349,7 @@ public class SqlSearcherObject {
 
         Statement stmt = conn.createStatement();
         if (destination.equals("clt")) {
-            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM titsgame.checklisttemplate");
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM itsgame.checklisttemplate");
 
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -358,7 +357,7 @@ public class SqlSearcherObject {
             }
             conn.close();
         } else if (destination.equals("tf")) {
-            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM titsgame.time_frame");
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM itsgame.time_frame");
 
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -366,7 +365,7 @@ public class SqlSearcherObject {
             }
             conn.close();
         } else if (destination.equals("emp")) {
-            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM titsgame.employee");
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM itsgame.employee");
 
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
