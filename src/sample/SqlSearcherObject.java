@@ -317,23 +317,19 @@ public class SqlSearcherObject {
     }
 
     public String pullTimeFrameTF(int id) throws SQLException {
+        System.out.println(id);
         StringBuilder stringBuilder1 = new StringBuilder();
 
-        SixItemHolder bag = new SixItemHolder();
-        bag.setText1(String.valueOf(id));
-        if (bag.getText1().equals("-8008135")) {
-            bag.setText2("select * from itsgame.time_frame");
-        } else {
-            bag.setText2("select * FROM itsgame.time_frame where id=?");
-        }
+       // SixItemHolder bag = new SixItemHolder();
+       // bag.setText1(String.valueOf(id));
+
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        PreparedStatement preparedStatement = conn.prepareStatement(bag.getText2());
+        PreparedStatement preparedStatement = conn.prepareStatement("select * FROM itsgame.time_frame where id=?");
         preparedStatement.setInt(1, id);
         ResultSet rs = preparedStatement.executeQuery();
         stringBuilder1.append(" id / name ");
         while (rs.next()) {
-            stringBuilder1.append("\n " + rs.getInt(1) + emptyspace + rs.getString(2)
-            );
+            stringBuilder1.append("\n " + rs.getInt(1) + emptyspace + rs.getString(2));
         }
         conn.close();
 

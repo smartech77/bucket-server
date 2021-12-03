@@ -25,10 +25,10 @@ public class Main {
 
         //these seed the database with some values, if they don't appear in Mysql workbench something isn't working properly.
         System.out.println(sql2.insertTF("Paloki"));
-        System.out.println(sql2.insertCLT("Paloki", 1));
-        System.out.println(sql2.insertEmployee("Paloki","Palokijevic"));
-        System.out.println(sql2.insertCLIT("Paloki",1,1,1));
-        System.out.println(sql2.insertEmployeeChecklist(1,1,"1",1,"1"));
+    //    System.out.println(sql2.insertCLT("Paloki", 1));
+    //    System.out.println(sql2.insertEmployee("Paloki","Palokijevic"));
+    //    System.out.println(sql2.insertCLIT("Paloki",1,1,1));
+     //   System.out.println(sql2.insertEmployeeChecklist(1,1,"1",1,"1"));
 
 
 
@@ -65,12 +65,7 @@ public class Main {
 
 
 
-        while (1 > 0) {
-            for (int i = 0; i < listeners.size(); i++) {
-                System.out.println(listeners.get(i).socket1);
-            }
-            Thread.sleep(10000);
-        }
+
 
 
     }

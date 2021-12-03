@@ -64,6 +64,7 @@ public class listener implements Runnable {
 
 
     public String filtertheneedful(String[] TcpMessage) throws SQLException {
+        System.out.println(TcpMessage[0]+TcpMessage[1]);
      //   String[]Credentials = TcpMessage[2].split("aolaskjdfkjasdbf");
 
         if      (TcpMessage[0].equals("deleteCLIT")) { return sql1.deleteCLIT(Integer.parseInt(TcpMessage[1])); }
@@ -75,10 +76,12 @@ public class listener implements Runnable {
         else if (TcpMessage[0].equals("pullCLTnoITEMS")){return sql1.pullCLTnoITEMS(Integer.parseInt(TcpMessage[1]));}
         else if (TcpMessage[0].equals("pullEmployee")){return sql1.pullEmployee(Integer.parseInt(TcpMessage[1]));}
         else if (TcpMessage[0].equals("pullEmployeeCheckListECL")){return sql1.pullEmployeeCheckListECL(Integer.parseInt(TcpMessage[1]));}
-        else if (TcpMessage[0].equals("pullTimeFrameTF")){return sql1.pullTimeFrameTF(Integer.parseInt(TcpMessage[1]));}
+        else if (TcpMessage[0].equals("pullTimeFrameTF")){
+          //  int number = Integer.parseInt(TcpMessage[1]);
+            return sql1.pullTimeFrameTF(Integer.parseInt(TcpMessage[1]));}
 
         else {
-            String[]Payload = TcpMessage[2].split("0yormungandr0yormungandr0");
+            String[]Payload = TcpMessage[2].split("!");
 
          if (TcpMessage[0].equals("insertCLIT")) {
                 return sql1.insertCLIT(Payload[0],Integer.parseInt(Payload[1]),Integer.parseInt(Payload[2]),Integer.parseInt(Payload[3]) );
